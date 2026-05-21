@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arun & Dheepika Wedding Invitation</title>
+    <meta name="description" content="You are cordially invited to celebrate the wedding of Arun and Dheepika.">
+    
+    <!-- HIGHEST PRIORITY: Preload envelope video instantly before fonts or CSS -->
+    <link rel="preload" href="assets/envelope-portrait.mp4" as="video" media="(max-width: 768px)">
+    <link rel="preload" href="assets/envelope-combined.mp4" as="video" media="(min-width: 769px)">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Alex+Brush&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles.css?v=6">
+</head>
+<body>
+    <!-- Envelope Preloader -->
+    <div id="envelope-preloader" class="envelope-preloader">
+        <div class="envelope-wrapper">
+            <!-- Loading spinner while video buffers -->
+            <div id="envelope-spinner" class="envelope-spinner"></div>
+            <!-- JS will set the src reliably, but preloads above ensure it downloads instantly -->
+            <video id="envelope-video" playsinline autoplay muted
+                data-src-landscape="assets/envelope-combined.mp4"
+                data-src-portrait="assets/envelope-portrait.mp4"></video>
+            <!-- Hidden by default, JS will show it when video is ready -->
+            <p class="envelope-prompt" id="envelope-prompt" style="opacity: 0; animation: none;">Tap to Open</p>
+        </div>
+    </div>
+    <canvas id="particles-canvas"></canvas>
+    <div id="jasmine-container" class="jasmine-container"></div>
+
+    <button id="music-toggle" class="music-toggle" aria-label="Toggle Music">
+        <svg viewBox="0 0 24 24" class="music-icon music-on">
+            <path
+                d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+        </svg>
+        <svg viewBox="0 0 24 24" class="music-icon music-off">
+            <path
+                d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+        </svg>
+    </button>
+
+    <main id="main-content">
+        <!-- HERO -->
+        <section id="hero" class="section hero">
+            <div class="hero-mandala-wrapper">
+                <div class="hero-mandala-container"><img src="assets/mandala.png" alt="" class="hero-mandala"
+                        aria-hidden="true"></div>
+            </div>
+            <div class="hero-content reveal">
+                <div class="hero-ornament-top"><svg viewBox="0 0 200 20" class="ornament-svg">
+                        <path d="M0 10 Q50 0 100 10 Q150 20 200 10" fill="none" stroke="currentColor"
+                            stroke-width="1" />
+                        <circle cx="100" cy="10" r="3" fill="currentColor" />
+                        <circle cx="60" cy="6" r="2" fill="currentColor" />
+                        <circle cx="140" cy="14" r="2" fill="currentColor" />
+                    </svg></div>
+                <p class="hero-subtitle">Together with their families</p>
+                <div class="hero-names">
+                    <h1><span class="name name-groom">Arun</span><span class="name-ampersand">&</span><span
+                            class="name name-bride">Dheepika</span></h1>
+                </div>
+                <p class="hero-tagline">request the honour of your presence at the celebration of their marriage</p>
+                <div class="hero-ornament-bottom"><svg viewBox="0 0 200 20" class="ornament-svg">
+                        <path d="M0 10 Q50 20 100 10 Q150 0 200 10" fill="none" stroke="currentColor"
+                            stroke-width="1" />
+                        <circle cx="100" cy="10" r="3" fill="currentColor" />
+                        <circle cx="60" cy="14" r="2" fill="currentColor" />
+                        <circle cx="140" cy="6" r="2" fill="currentColor" />
+                    </svg></div>
+            </div>
+            <div class="scroll-indicator"><span>Scroll to explore</span>
+                <div class="scroll-arrow"><svg viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 16l-6-6h12z" fill="currentColor" />
+                    </svg></div>
+            </div>
+            <!-- Peacocks anchored to hero -->
+            <div class="peacock-animation peacock-left" id="peacock-anim-left" aria-hidden="true">
+                <video id="peacock-video-left" src="assets/peacock-video.mp4" muted playsinline preload="metadata"></video>
+            </div>
+            <div class="peacock-animation peacock-right" id="peacock-anim-right" aria-hidden="true">
+                <video id="peacock-video-right" src="assets/peacock-video.mp4" muted playsinline preload="metadata"></video>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="section-divider"><svg viewBox="0 0 400 30" class="divider-draw">
+                <path class="draw-path" d="M0 15 Q100 5 200 15 Q300 25 400 15" />
+                <circle class="draw-dot" cx="200" cy="15" r="3" />
+            </svg></div>
+
+        <!-- INVOCATION with realistic dheepam -->
+        <section id="invocation" class="section invocation">
+            <div class="invocation-content reveal">
+                <div class="dheepam-container">
+                    <img src="assets/dheepam-option-3.png" alt="Sacred Lamp" class="dheepam-img">
+                </div>
+                <h2 class="invocation-symbol">ॐ</h2>
+                <div class="invocation-divider"><span class="divider-diamond">◆</span></div>
+                <p class="invocation-text">With the divine blessings of the Almighty<br>and the good wishes of our
+                    elders,<br>we joyfully invite you to grace the auspicious occasion<br>of the wedding celebration of
+                    our beloved children.</p>
+            </div>
+            <!-- Wedding entrance pillars: banana plant + kalasam -->
+            <div class="entrance-pillar entrance-left" aria-hidden="true">
+                <img src="assets/banana-plant-new.png" alt="" class="banana-plant-img">
+                <div class="kalasam-wrap">
+                    <img src="assets/kalasam.png" alt="" class="kalasam-img">
+                    <div class="kalasam-glow"></div>
+                </div>
+            </div>
+            <div class="entrance-pillar entrance-right" aria-hidden="true">
+                <img src="assets/banana-plant-new.png" alt="" class="banana-plant-img">
+                <div class="kalasam-wrap">
+                    <img src="assets/kalasam.png" alt="" class="kalasam-img">
+                    <div class="kalasam-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GOPURAM -->
+        <section class="section gopuram-section">
+            <div class="gopuram-container reveal"><img src="assets/gopuram-option-1.png" alt="South Indian Temple"
+                    class="gopuram-image">
+                <div class="gopuram-glow"></div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="section-divider"><svg viewBox="0 0 400 30" class="divider-draw">
+                <path class="draw-path" d="M50 15 Q125 0 200 15 Q275 30 350 15" />
+                <circle class="draw-dot" cx="150" cy="10" r="2" />
+                <circle class="draw-dot" cx="200" cy="15" r="3" />
+                <circle class="draw-dot" cx="250" cy="20" r="2" />
+            </svg></div>
+
+        <!-- EVENTS SECTION -->
+        <section id="events" class="section events">
+            <div class="section-header reveal">
+                <h2 class="section-title">Celebration</h2>
+                <p class="section-subtitle">Three sacred ceremonies unite two souls</p>
+                <div class="title-ornament"><span class="ornament-line"></span><span
+                        class="ornament-diamond">◆</span><span class="ornament-line"></span></div>
+            </div>
+
+            <!-- Nischiyadartham Block -->
+            <div class="ceremony-block">
+                <div class="ceremony-arch-container" aria-hidden="true">
+                    <img src="assets/arch_nischyadartham.png" alt="" class="ceremony-arch-img">
+                </div>
+                <div class="event-card-wrapper reveal" data-delay="0.2" data-event="nischiyam">
+                    <div class="event-card" id="event-nischiyam">
+                        <div class="event-card-inner">
+                            <h3 class="event-name">Nischiyadartham</h3>
+                            <div class="event-date-display"><span class="event-day">Saturday</span>
+                                <div class="event-date-main"><span class="event-month">August</span><span
+                                        class="event-date-num" data-count="22">0</span><span
+                                        class="event-year">2026</span></div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5-3H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"
+                                            fill="currentColor" />
+                                    </svg><span>10:30 AM onwards</span></div>
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                            fill="currentColor" />
+                                    </svg><a href="https://maps.app.goo.gl/o1HjHv7pQ8BPWC5p6" target="_blank"
+                                        rel="noopener"
+                                        style="color:inherit;text-decoration:underline;text-underline-offset:3px;">Manima Thirumana Mahal</a></div>
+                            </div>
+                            <button class="add-to-cal" data-title="Nischiyadartham — Arun & Dheepika"
+                                data-date="2026-08-22" data-time="10:30" data-end="13:00" data-location="Manima Thirumana Mahal"
+                                data-map="https://maps.app.goo.gl/o1HjHv7pQ8BPWC5p6"
+                                data-desc="Engagement Ceremony of Arun & Dheepika"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="currentColor"/></svg> Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reception Block -->
+            <div class="ceremony-block">
+                <div class="ceremony-arch-container" aria-hidden="true">
+                    <img src="assets/arch_reception.png" alt="" class="ceremony-arch-img">
+                </div>
+                <div class="event-card-wrapper reveal" data-delay="0.6" data-event="reception">
+                    <div class="event-card" id="event-reception">
+                        <div class="event-card-inner">
+                            <h3 class="event-name">Reception</h3>
+                            <div class="event-date-display"><span class="event-day">Saturday</span>
+                                <div class="event-date-main"><span class="event-month">August</span><span
+                                        class="event-date-num" data-count="29">0</span><span
+                                        class="event-year">2026</span></div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5-3H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"
+                                            fill="currentColor" />
+                                    </svg><span>06:30 PM onwards</span></div>
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                            fill="currentColor" />
+                                    </svg><a href="https://maps.app.goo.gl/cVq5f97WAae3aQkNA" target="_blank"
+                                        rel="noopener"
+                                        style="color:inherit;text-decoration:underline;text-underline-offset:3px;">PM
+                                        Kalyana Mantapa</a></div>
+                            </div>
+                            <button class="add-to-cal" data-title="Reception — Arun & Dheepika" data-date="2026-08-29"
+                                data-time="18:30" data-end="24:00" data-location="PM Kalyana Mantapa"
+                                data-map="https://maps.app.goo.gl/cVq5f97WAae3aQkNA"
+                                data-desc="Wedding Reception of Arun & Dheepika"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="currentColor"/></svg> Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Muhurtham Block -->
+            <div class="ceremony-block">
+                <div class="ceremony-arch-container" aria-hidden="true">
+                    <img src="assets/mandapa-arch.png" alt="" class="ceremony-arch-img">
+                </div>
+                <div class="event-card-wrapper reveal" data-delay="0.4" data-event="muhurtham">
+                    <div class="event-card" id="event-muhurtham">
+                        <div class="event-card-inner">
+                            <h3 class="event-name">Muhurtham</h3>
+                            <div class="event-date-display"><span class="event-day">Sunday</span>
+                                <div class="event-date-main"><span class="event-month">August</span><span
+                                        class="event-date-num" data-count="30">0</span><span
+                                        class="event-year">2026</span></div>
+                            </div>
+                            <div class="event-details">
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm.5-3H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"
+                                            fill="currentColor" />
+                                    </svg><span>Muhurtham at 07:40 AM</span></div>
+                                <div class="event-detail"><svg viewBox="0 0 24 24" width="16" height="16">
+                                        <path
+                                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                                            fill="currentColor" />
+                                    </svg><a href="https://maps.app.goo.gl/cVq5f97WAae3aQkNA" target="_blank"
+                                        rel="noopener"
+                                        style="color:inherit;text-decoration:underline;text-underline-offset:3px;">PM
+                                        Kalyana Mantapa</a></div>
+                            </div>
+                            <button class="add-to-cal" data-title="Muhurtham — Arun & Dheepika" data-date="2026-08-30"
+                                data-time="07:40" data-end="09:00" data-location="PM Kalyana Mantapa"
+                                data-map="https://maps.app.goo.gl/cVq5f97WAae3aQkNA"
+                                data-desc="Muhurtham of Arun & Dheepika"><svg viewBox="0 0 24 24" width="16" height="16"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM9 14H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2zm-8 4H7v-2h2v2zm4 0h-2v-2h2v2zm4 0h-2v-2h2v2z" fill="currentColor"/></svg> Add to Calendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIVIDER -->
+        <div class="section-divider"><svg viewBox="0 0 400 30" class="divider-draw">
+                <path class="draw-path" d="M0 15 Q100 5 200 15 Q300 25 400 15" />
+                <circle class="draw-dot" cx="200" cy="15" r="3" />
+            </svg></div>
+
+        <!-- COUNTDOWN -->
+        <section id="countdown" class="section countdown-section">
+            <div class="countdown-content reveal">
+                <h2 class="countdown-title">Counting Down To The Big Day</h2>
+                <div class="countdown-timer" id="countdown-timer">
+                    <div class="countdown-unit"><span class="countdown-number" id="countdown-days">00</span><span
+                            class="countdown-label">Days</span></div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit"><span class="countdown-number" id="countdown-hours">00</span><span
+                            class="countdown-label">Hours</span></div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit"><span class="countdown-number" id="countdown-minutes">00</span><span
+                            class="countdown-label">Minutes</span></div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-unit"><span class="countdown-number" id="countdown-seconds">00</span><span
+                            class="countdown-label">Seconds</span></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CLOSING -->
+        <section id="closing" class="section closing">
+            <div class="closing-content reveal">
+                <div class="closing-ornament"><svg viewBox="0 0 300 40" class="ornament-wide-svg">
+                        <path d="M0 20 Q75 0 150 20 Q225 40 300 20" fill="none" stroke="currentColor"
+                            stroke-width="0.8" />
+                        <path d="M0 20 Q75 40 150 20 Q225 0 300 20" fill="none" stroke="currentColor"
+                            stroke-width="0.8" />
+                        <circle cx="150" cy="20" r="4" fill="currentColor" />
+                    </svg></div>
+                <p class="closing-text">Your gracious presence and blessings<br>would make our celebration truly
+                    memorable.</p>
+                <p class="closing-translation">With warm regards & best wishes</p>
+                <div class="closing-names">
+                    <p>From the families of</p>
+                    <h3>Arun & Dheepika</h3>
+                </div>
+                <div class="closing-ornament"><svg viewBox="0 0 300 40" class="ornament-wide-svg">
+                        <path d="M0 20 Q75 40 150 20 Q225 0 300 20" fill="none" stroke="currentColor"
+                            stroke-width="0.8" />
+                        <path d="M0 20 Q75 0 150 20 Q225 40 300 20" fill="none" stroke="currentColor"
+                            stroke-width="0.8" />
+                        <circle cx="150" cy="20" r="4" fill="currentColor" />
+                    </svg></div>
+            </div>
+        </section>
+        <footer class="footer">
+            <p>Made with ❤️ by Arun & Dheepika</p>
+        </footer>
+    </main>
+    <script src="script.js?v=5"></script>
+</body>
+
+</html>
