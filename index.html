@@ -9,7 +9,7 @@
     
     <!-- HIGHEST PRIORITY: Preload envelope video instantly before fonts or CSS -->
     <link rel="preload" href="assets/envelope-portrait.mp4" as="video" media="(max-width: 768px)">
-    <link rel="preload" href="assets/envelope-combined.mp4" as="video" media="(min-width: 769px)">
+    <link rel="preload" href="assets/desktop-video.mp4" as="video" media="(min-width: 769px)">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,7 +28,7 @@
             <div id="envelope-spinner" class="envelope-spinner"></div>
             <!-- JS will set the src reliably, but preloads above ensure it downloads instantly -->
             <video id="envelope-video" playsinline autoplay muted
-                data-src-landscape="assets/envelope-combined.mp4"
+                data-src-landscape="assets/desktop-video.mp4"
                 data-src-portrait="assets/envelope-portrait.mp4"></video>
             <!-- Hidden by default, JS will show it when video is ready -->
             <p class="envelope-prompt" id="envelope-prompt" style="opacity: 0; animation: none;">Tap to Open</p>
